@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bullying: Entenda, Previna, Aja</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#ec4899',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        success: '#10b981',
+                        dark: '#1e293b',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .tab-active {
+            border-bottom: 3px solid #6366f1;
+            color: #6366f1;
+            font-weight: 600;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .stat-counter {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <span class="font-bold text-xl text-gray-800">Safe<span class="text-primary">School</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-gray-600 hover:text-primary transition-colors font-medium">Início</a>
+                    <a href="#definicao" class="text-gray-600 hover:text-primary transition-colors font-medium">O que é</a>
+                    <a href="#estatisticas" class="text-gray-600 hover:text-primary transition-colors font-medium">Estatísticas</a>
+                    <a href="#onde" class="text-gray-600 hover:text-primary transition-colors font-medium">Onde Acontece</a>
+                    <a href="#prevencao" class="text-gray-600 hover:text-primary transition-colors font-medium">O que Fazer</a>
+                    <a href="#referencias" class="text-gray-600 hover:text-primary transition-colors font-medium">Referências</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-600 hover:text-primary" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 pt-2 pb-4 space-y-2">
+                <a href="#inicio" class="block py-2 text-gray-600 hover:text-primary">Início</a>
+                <a href="#definicao" class="block py-2 text-gray-600 hover:text-primary">O que é</a>
+                <a href="#estatisticas" class="block py-2 text-gray-600 hover:text-primary">Estatísticas</a>
+                <a href="#onde" class="block py-2 text-gray-600 hover:text-primary">Onde Acontece</a>
+                <a href="#prevencao" class="block py-2 text-gray-600 hover:text-primary">O que Fazer</a>
+                <a href="#referencias" class="block py-2 text-gray-600 hover:text-primary">Referências</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 hero-pattern overflow-hidden pt-16">
+        <div class="absolute inset-0 bg-black/20"></div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float blur-xl"></div>
+        <div class="absolute bottom-20 right-10 w-32 h-32 bg-pink-400/20 rounded-full animate-float blur-2xl" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-blue-400/20 rounded-full animate-float blur-xl" style="animation-delay: 4s;"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate-slide-up">
+                <div class="inline-block mb-4 px-4 py-2 bg-white/20 rounded-full text-white text-sm font-semibold backdrop-blur-sm border border-white/30">
+                    <i class="fas fa-exclamation-circle mr-2"></i> 4 em cada 10 adolescentes sofrem bullying
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+                    Bullying não é <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300">brincadeira</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto font-light">
+                    Entenda o que é bullying, onde ele acontece e como podemos combater juntos este problema que afeta milhões de jovens no Brasil e no mundo.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#definicao" class="px-8 py-4 bg-white text-indigo-600 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-book-open"></i> Saiba Mais
+                    </a>
+                    <a href="#prevencao" class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-hands-helping"></i> Como Ajudar
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Stats Preview -->
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="glass-effect rounded-2xl p-6 text-white">
+                    <div class="text-4xl font-bold mb-2">39,8%</div>
+                    <div class="text-sm opacity-90">dos estudantes sofrem bullying</div>
+                </div>
+                <div class="glass-effect rounded-2xl p-6 text-white">
+                    <div class="text-4xl font-bold mb-2">300mil</div>
+                    <div class="text-sm opacity-90">casos graves no Brasil</div>
+                </div>
+                <div class="glass-effect rounded-2xl p-6 text-white">
+                    <div class="text-4xl font-bold mb-2">13,2%</div>
+                    <div class="text-sm opacity-90">sofreram cyberbullying</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-white/70">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Definition Section -->
+    <section id="definicao" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">O que é <span class="gradient-text">Bullying</span>?</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="bg-indigo-50 border-l-4 border-primary p-6 rounded-r-xl">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Definição Legal (Lei 14.811/2024)</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong>Intimidação sistemática</strong> - individual ou em grupo, mediante violência física ou psicológica, de modo intencional e repetitivo, sem motivação evidente, por meio de atos de intimidação, humilhação ou discriminação. [^26^]
+                        </p>
+                    </div>
+                    
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        O bullying é caracterizado por três elementos fundamentais: <strong>intencionalidade</strong> (dolo), <strong>repetição</strong> (não é um incidente isolado) e <strong>desequilíbrio de poder</strong> (a vítima tem dificuldade de se defender). [^30^]
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                            <i class="fas fa-fist-raised text-red-500 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-gray-800">Físico</h4>
+                            <p class="text-sm text-gray-600">Bater, empurrar, destruir objetos</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                            <i class="fas fa-comment-slash text-blue-500 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-gray-800">Verbal</h4>
+                            <p class="text-sm text-gray-600">Insultos, apelidos, ameaças</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100">
+                            <i class="fas fa-user-slash text-purple-500 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-gray-800">Social</h4>
+                            <p class="text-sm text-gray-600">Exclusão, boatos, isolamento</p>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
+                            <i class="fas fa-laptop text-orange-500 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-gray-800">Cyberbullying</h4>
+                            <p class="text-sm text-gray-600">Agressões online, redes sociais</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-3xl transform rotate-3 opacity-20"></div>
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=600&fit=crop" alt="Apoio emocional" class="relative rounded-3xl shadow-2xl w-full object-cover h-[500px]">
+                    
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl max-w-xs">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <span class="font-bold text-gray-800">Lei 14.811/2024</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Bullying e cyberbullying são crimes no Brasil. Cyberbullying: 2 a 4 anos de reclusão. [^29^]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="estatisticas" class="py-20 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Números que <span class="text-red-400">Preocupam</span></h2>
+                <p class="text-gray-400 text-lg">Dados atualizados do IBGE e PeNSE 2024</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-gray-700 text-center card-hover">
+                    <div class="text-5xl font-bold text-red-400 mb-2 stat-counter" data-target="39.8">0</div>
+                    <div class="text-gray-300 mb-2">% dos estudantes</div>
+                    <p class="text-sm text-gray-400">de 13-17 anos já sofreram bullying</p>
+                    <div class="mt-4 text-xs text-gray-500">Fonte: IBGE/PeNSE 2024 [^11^]</div>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-gray-700 text-center card-hover">
+                    <div class="text-5xl font-bold text-pink-400 mb-2 stat-counter" data-target="43.3">0</div>
+                    <div class="text-gray-300 mb-2">% entre meninas</div>
+                    <p class="text-sm text-gray-400">são as principais vítimas</p>
+                    <div class="mt-4 text-xs text-gray-500">Fonte: IBGE/PeNSE 2024 [^11^]</div>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-gray-700 text-center card-hover">
+                    <div class="text-5xl font-bold text-yellow-400 mb-2 stat-counter" data-target="13.2">0</div>
+                    <div class="text-gray-300 mb-2">% sofreram</div>
+                    <p class="text-sm text-gray-400">cyberbullying (UFMG/IBGE)</p>
+                    <div class="mt-4 text-xs text-gray-500">Fonte: PeNSE 2024 [^22^]</div>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-gray-700 text-center card-hover">
+                    <div class="text-5xl font-bold text-orange-400 mb-2">4º</div>
+                    <div class="text-gray-300 mb-2">Lugar mundial</div>
+                    <p class="text-sm text-gray-400">Brasil: 300 mil casos graves</p>
+                    <div class="mt-4 text-xs text-gray-500">Fonte: BSF 2026 [^23^]</div>
+                </div>
+            </div>
+
+            <!-- Brazil Ranking -->
+            <div class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-3xl p-8 border border-gray-700">
+                <h3 class="text-2xl font-bold mb-6 text-center">Brasil no Ranking Mundial de Bullying</h3>
+                <div class="space-y-4 max-w-3xl mx-auto">
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-400 w-8">1º</span>
+                        <div class="flex-1 bg-gray-700 rounded-full h-8 relative overflow-hidden">
+                            <div class="absolute left-0 top-0 h-full bg-red-500/50 rounded-full" style="width: 100%"></div>
+                            <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-sm font-medium">Espanha - 360.000 casos</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-400 w-8">2º</span>
+                        <div class="flex-1 bg-gray-700 rounded-full h-8 relative overflow-hidden">
+                            <div class="absolute left-0 top-0 h-full bg-orange-500/50 rounded-full" style="width: 94%"></div>
+                            <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-sm font-medium">EUA - 340.000 casos</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-400 w-8">3º</span>
+                        <div class="flex-1 bg-gray-700 rounded-full h-8 relative overflow-hidden">
+                            <div class="absolute left-0 top-0 h-full bg-yellow-500/50 rounded-full" style="width: 91%"></div>
+                            <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-sm font-medium">Alemanha - 330.000 casos</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-red-400 font-bold w-8">4º</span>
+                        <div class="flex-1 bg-gray-700 rounded-full h-8 relative overflow-hidden border-2 border-red-400">
+                            <div class="absolute left-0 top-0 h-full bg-red-600 rounded-full" style="width: 83%"></div>
+                            <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-sm font-bold text-white">Brasil - 300.000 casos</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-gray-400 mt-6 text-sm">Dados da Organização Mundial Bullying Sem Fronteiras (2026) [^25^]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Where it happens -->
+    <section id="onde" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Onde o Bullying <span class="text-primary">Acontece</span>?</h2>
+                <p class="text-gray-600 text-lg">Conheça os principais locais e contextos de vulnerabilidade</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- School Environment -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 border border-blue-100 card-hover">
+                    <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-blue-500/30">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Ambiente Escolar</h3>
+                    <p class="text-gray-600 mb-4">75,5% da violência escolar ocorre dentro da escola, especialmente em locais sem supervisão. [^30^]</p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Banheiros e vestiários</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Corredores e escadas</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Pátios e áreas recreativas</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Salas de aula (quando professor não percebe)</li>
+                    </ul>
+                </div>
+
+                <!-- Digital Environment -->
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 border border-purple-100 card-hover">
+                    <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-purple-500/30">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Mundo Digital</h3>
+                    <p class="text-gray-600 mb-4">15,7% dos casos são cyberbullying, com pico entre 12-15 anos. [^18^]</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between bg-white/70 p-3 rounded-lg">
+                            <span class="flex items-center gap-2"><i class="fab fa-facebook text-blue-600"></i> Facebook</span>
+                            <span class="text-red-500 font-bold">75%</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-white/70 p-3 rounded-lg">
+                            <span class="flex items-center gap-2"><i class="fab fa-instagram text-pink-600"></i> Instagram</span>
+                            <span class="text-red-500 font-bold">24%</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-white/70 p-3 rounded-lg">
+                            <span class="flex items-center gap-2"><i class="fab fa-tiktok text-black"></i> TikTok</span>
+                            <span class="text-red-500 font-bold">9%</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">Fonte: Pew Research Center [^24^]</p>
+                </div>
+
+                <!-- Route to School -->
+                <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl p-8 border border-orange-100 card-hover">
+                    <div class="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg shadow-orange-500/30">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Caminho da Escola</h3>
+                    <p class="text-gray-600 mb-4">24,5% dos casos ocorrem fora da escola, no trajeto ou entorno. [^30^]</p>
+                    <div class="bg-white/70 p-4 rounded-xl border-l-4 border-orange-500 mb-4">
+                        <p class="text-sm text-gray-700"><strong>Alarmante:</strong> 1,5 milhão de estudantes faltam à escola por medo da violência no trajeto. [^14^]</p>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-center gap-2"><i class="fas fa-exclamation-triangle text-orange-500"></i> Pontos de ônibus</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-exclamation-triangle text-orange-500"></i> Ruas próximas à escola</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-exclamation-triangle text-orange-500"></i> Áreas de difícil acesso</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Vulnerable Groups -->
+            <div class="bg-gray-50 rounded-3xl p-8 border border-gray-200">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Grupos Mais Vulneráveis</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="text-center p-4">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 mx-auto mb-3">
+                            <i class="fas fa-venus"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Meninas</h4>
+                        <p class="text-sm text-gray-600">43,3% sofrem bullying vs 36% dos meninos [^11^]</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mx-auto mb-3">
+                            <i class="fas fa-transgender-alt"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">LGBTQIA+</h4>
+                        <p class="text-sm text-gray-600">86% sentem insegurança na escola; 93% entre pessoas trans [^18^]</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 mx-auto mb-3">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">13-15 anos</h4>
+                        <p class="text-sm text-gray-600">Faixa etária de maior prevalência [^18^]</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 mx-auto mb-3">
+                            <i class="fas fa-sad-tear"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Sem amigos</h4>
+                        <p class="text-sm text-gray-600">26,1% de prevalência entre isolados sociais [^22^]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prevention & Action -->
+    <section id="prevencao" class="py-20 bg-gradient-to-br from-indigo-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">O que <span class="text-primary">Fazer</span>?</h2>
+                <p class="text-gray-600 text-lg">Estratégias de prevenção e combate para diferentes perfis</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex justify-center mb-12 border-b border-gray-200">
+                <button onclick="switchTab('vitima')" id="tab-vitima" class="tab-btn px-6 py-3 text-lg font-medium text-gray-600 hover:text-primary transition-colors tab-active">
+                    Se Você é Vítima
+                </button>
+                <button onclick="switchTab('testemunha')" id="tab-testemunha" class="tab-btn px-6 py-3 text-lg font-medium text-gray-600 hover:text-primary transition-colors">
+                    Se Você Presencia
+                </button>
+                <button onclick="switchTab('pais')" id="tab-pais" class="tab-btn px-6 py-3 text-lg font-medium text-gray-600 hover:text-primary transition-colors">
+                    Para Pais/Educadores
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="content-vitima" class="tab-content">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-red-500">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                                <span class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-sm">1</span>
+                                Não fique em silêncio
+                            </h3>
+                            <p class="text-gray-600">Converse com um adulto de confiança: pais, professores, coordenadores ou conselheiros. 69% dos estudantes LGBTQIA+ procuraram ajuda, mas 47% consideraram as respostas pouco eficazes. [^18^] Por isso, insista até ser ouvido.</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-blue-500">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                                <span class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-sm">2</span>
+                                Documente tudo
+                            </h3>
+                            <p class="text-gray-600">Guarde mensagens, prints, fotos ou qualquer evidência do bullying. O cyberbullying deixa rastros digitais que podem ser usados como prova. [^34^]</p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-green-500">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                                <span class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-sm">3</span>
+                                Busque apoio emocional
+                            </h3>
+                            <p class="text-gray-600">94% dos estudantes LGBTQIA+ relataram depressão no último mês devido ao bullying. [^18^] Não hesite em procurar ajuda psicológica. Ligue para o <strong>CVV 188</strong> ou acesse o <strong>Chat da Saúde Mental</strong> do Ministério da Saúde.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-8 shadow-xl">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Direitos da Vítima</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4 p-4 bg-indigo-50 rounded-xl">
+                                <i class="fas fa-gavel text-indigo-600 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Denunciar na escola</h4>
+                                    <p class="text-sm text-gray-600">A escola é obrigada a adotar medidas de proteção e protocolos de atendimento. [^20^]</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 bg-indigo-50 rounded-xl">
+                                <i class="fas fa-shield-alt text-indigo-600 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Medidas de proteção</h4>
+                                    <p class="text-sm text-gray-600">Vigilância reforçada, reorganização de turmas/horários e acompanhamento psicológico. [^20^]</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 bg-indigo-50 rounded-xl">
+                                <i class="fas fa-balance-scale text-indigo-600 text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Registro de BO</h4>
+                                    <p class="text-sm text-gray-600">A Lei 14.811/2024 criminalizou o bullying. Cyberbullying tem pena de 2 a 4 anos de reclusão. [^29^]</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+                            <p class="text-sm text-red-800 font-medium text-center">
+                                <i class="fas fa-phone-alt mr-2"></i>
+                                Emergência: <strong>190</strong> (Polícia) | <strong>100</strong> (Direitos Humanos) | <strong>188</strong> (CVV)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-testemunha" class="tab-content hidden">
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white p-8 rounded-2xl shadow-md text-center card-hover">
+                        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-3xl mx-auto mb-4">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Seja um Defensor</h3>
+                        <p class="text-gray-600">Não seja um espectador. Aja para apoiar quem está sendo acosado. A presença de aliados reduz significativamente o impacto do bullying. [^15^]</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-md text-center card-hover">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-3xl mx-auto mb-4">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Força nos Números</h3>
+                        <p class="text-gray-600">Convide a vítima para se juntar ao seu grupo. Ande com ela entre as aulas. Bullyings geralmente acontecem quando a vítima está sozinha. [^15^]</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-md text-center card-hover">
+                        <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-3xl mx-auto mb-4">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Intervenção Verbal</h3>
+                        <p class="text-gray-600">Se for seguro, diga "Pare! Isso é bullying e não está certo". Levantar a voz cria uma cultura de não aceitação à crueldade. [^15^]</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-white rounded-2xl p-8 shadow-md">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">O Poder do Espectador</h3>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <p class="text-gray-600 mb-4">Quando espectadores intervêm, o bullying para em menos de 10 segundos na maioria das vezes. Sua atitude faz a diferença!</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3 text-gray-700">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                    <span>Aproxime-se da vítima e afaste-a da situação</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-gray-700">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                    <span>Ofereça-se para acompanhá-la até um adulto</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-gray-700">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                    <span>Relate o ocorrido anonimamente se necessário</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-6 text-white text-center">
+                            <div class="text-5xl font-bold mb-2">57%</div>
+                            <p>dos casos de bullying param quando um colega intervém</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-pais" class="tab-content hidden">
+                <div class="space-y-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white rounded-2xl p-6 shadow-md">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <i class="fas fa-home text-indigo-600"></i>
+                                Em Casa
+                            </h3>
+                            <ul class="space-y-3 text-gray-600">
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-angle-right text-indigo-500 mt-1"></i>
+                                    <span>Mantenha comunicação aberta e não-julgadora</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-angle-right text-indigo-500 mt-1"></i>
+                                    <span>Observe mudanças de comportamento (isolation, queda de notas)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-angle-right text-indigo-500 mt-1"></i>
+                                    <span>Fortaleça a autoestima e inteligência emocional</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-angle-right text-indigo-500 mt-1"></i>
+                                    <span>Monitore o uso de redes sociais (sem invadir a privacidade)</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 shadow-md">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <i class="fas fa-school text-green-600"></i>
+                                Na Escola
+                            </h3>
+                            <ul class="space-y-3 text-gray-600">
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-angle-right text-green-500 mt-1"></i>
+                                    <span>Exija o cumprimento do Protocolo de Enfrentamento ao Bullying</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-angle-right text-green-500 mt-1"></i>
+                                    <span>Solicite reuniões com coordenação e professores</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-angle-right text-green-500 mt-1"></i>
+                                    <span>Acompanhe as medidas de proteção adotadas</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-angle-right text-green-500 mt-1"></i>
+                                    <span>Registre BO em casos graves (Lei 14.811/2024)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Sinais de Alerta</h3>
+                        <div class="grid md:grid-cols-4 gap-4 text-center">
+                            <div class="p-4">
+                                <i class="fas fa-sad-cry text-3xl text-yellow-600 mb-2"></i>
+                                <p class="text-sm font-medium">Mudanças de humor</p>
+                            </div>
+                            <div class="p-4">
+                                <i class="fas fa-bed text-3xl text-yellow-600 mb-2"></i>
+                                <p class="text-sm font-medium">Dificuldade para dormir</p>
+                            </div>
+                            <div class="p-4">
+                                <i class="fas fa-book-dead text-3xl text-yellow-600 mb-2"></i>
+                                <p class="text-sm font-medium">Queda no rendimento</p>
+                            </div>
+                            <div class="p-4">
+                                <i class="fas fa-door-open text-3xl text-yellow-600 mb-2"></i>
+                                <p class="text-sm font-medium">Recusa em ir à escola</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- References Section -->
+    <section id="referencias" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Referências <span class="text-primary">Bibliográficas</span></h2>
+                <p class="text-gray-600">Fontes consultadas para elaboração deste conteúdo</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <div class="bg-gray-50 rounded-3xl p-8 border border-gray-200">
+                <div class="space-y-6 text-sm text-gray-700">
+                    <div class="p-4 bg-white rounded-xl border-l-4 border-blue-500 shadow-sm">
+                        <p class="font-semibold text-gray-900 mb-1">[11] IBGE - Instituto Brasileiro de Geografia e Estatística (2026)</p>
+                        <p class="italic">"Pesquisa Nacional de Saúde do Escolar (PeNSE) 2024"</p>
+                        <p class="mt-2 text-gray-600">Dados sobre prevalência de bullying entre estudantes brasileiros de 13 a 17 anos. Disponível em: <a href="https://agenciabrasil.ebc.com.br/educacao/noticia/2026-03/ibge-quatro-em-cada-dez-adolescentes-ja-sofreram-bullying-na-escola" class="text-blue-600 hover:underline" target="_blank">Agência Brasil</a></p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border-l-4 border-purple-500 shadow-sm">
+                        <p class="font-semibold text-gray-900 mb-1">[14] CNN Brasil (2026)</p>
+                        <p class="italic">"Milhões de alunos faltam à escola por medo da violência, aponta IBGE"</p>
+                        <p class="mt-2 text-gray-600">Dados sobre violência no trajeto escolar e absenteeismo. Disponível em: <a href="https://www.cnnbrasil.com.br/nacional/brasil/milhoes-de-alunos-faltam-a-escola-por-medo-da-violencia-aponta-ibge/" class="text-blue-600 hover:underline" target="_blank">CNN Brasil</a></p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border-l-4 border-green-500 shadow-sm">
+                        <p class="font-semibold text-gray-900 mb-1">[18] Ministério da Educação - Brasil (2025)</p>
+                        <p class="italic">"2º Boletim Técnico: Dados sobre Bullying e Cyberbullying - Escola que Protege"</p>
+                        <p class="mt-2 text-gray-600">Dados sobre violência digital, estatísticas do SAEB 2023 e perfil das vítimas. Disponível em: <a href="https://www.gov.br/mec/pt-br/escola-que-protege/segundo-boletim-tecnico-escola-que-protege.pdf" class="text-blue-600 hover:underline" target="_blank">gov.br/mec</a></p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border-l-4 border-red-500 shadow-sm">
+                        <p class="font-semibold text-gray-900 mb-1">[22] UFMG/IBGE (2024)</p>
+                        <p class="italic">"Estudo revela elevada prevalência de cyberbullying entre adolescentes brasileiros"</p>
+                        <p class="mt-2 text-gray-600">Pesquisa pioneira no Brasil sobre cyberbullying com 159.245 estudantes. Disponível em: <a href="https://www3.ufmg.br/comunicacao/noticias/estudo-revela-elevada-prevalencia-de-cyberbulling-entre-adolescentes-brasileiros" class="text-blue-600 hover:underline" target="_blank">UFMG</a></p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border-l-4 border-yellow-500 shadow-sm">
+                        <p class="font-semibold text-gray-900 mb-1">[23][25] Organização Mundial Bullying Sem Fronteiras (2026)</p>
+                        <p class="italic">"Estatísticas Mundiais sobre Bullying 2026"</p>
+                        <p class="mt-2 text-gray-600">Ranking mundial de casos de bullying por país. Brasil em 4º lugar com 300.000 casos graves. Disponível em: <a href="https://bullyingsinfronteras.blogspot.com/2026/03/estatisticas-mundiais-sobre-bullying.html" class="text-blue-600 hover:underline" target="_blank">Bullying Sem Fronteiras</a></p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border-l-4 border-indigo-500 shadow-sm">
+                        <p class="font-semibold text-gray-900 mb-1">[24] Disparti Law (2025)</p>
+                        <p class="italic">"Top 5 Most Common Sites for Social Media Cyberbullying"</p>
+                        <p class="mt-2 text-gray-600">Estatísticas sobre plataformas digitais mais utilizadas para cyberbullying. Disponível em: <a href="https://www.dispartilaw.com/common-sites-for-social-media-cyberbullying/" class="text-blue-600 hover:underline" target="_blank">Disparti Law</a></p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border-l-4 border-pink-500 shadow-sm">
+                        <p class="font-semibold text-gray-900 mb-1">[26][27][28][29] Lei 14.811/2024</p>
+                        <p class="italic">"Lei nº 14.811, de 12 de janeiro de 2024 - Criminalização do Bullying e Cyberbullying"</p>
+                        <p class="mt-2 text-gray-600">Alterações no Código Penal, ECA e Lei dos Crimes Hediondos. Disponível em: <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/l14811.htm" class="text-blue-600 hover:underline" target="_blank">Planalto</a> e <a href="https://www12.senado.leg.br/noticias/materias/2024/01/15/sancionada-lei-que-criminaliza-bullying-e-amplia-punicao-para-crime-contra-crianca" class="text-blue-600 hover:underline" target="_blank">Agência Senado</a></p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border-l-4 border-teal-500 shadow-sm">
+                        <p class="font-semibold text-gray-900 mb-1">[30] UNESCO (2018/2020)</p>
+                        <p class="italic">"Violência escolar e bullying: Relatório Global"</p>
+                        <p class="mt-2 text-gray-600">Análise sobre locais de ocorrência do bullying e tendências globais. Disponível em: <a href="https://prceu.usp.br/wp-content/uploads/2020/10/2018-UNESCO-Relatorio-Violencia-Escolar-e-Bullying.pdf" class="text-blue-600 hover:underline" target="_blank">USP/UNESCO</a></p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border-l-4 border-orange-500 shadow-sm">
+                        <p class="font-semibold text-gray-900 mb-1">[15] Kids Mental Health Foundation (2025)</p>
+                        <p class="italic">"10 maneras de combatir el acoso"</p>
+                        <p class="mt-2 text-gray-600">Estratégias de prevenção e intervenção no bullying. Disponível em: <a href="https://www.kidsmentalhealthfoundation.org/es/mental-health-resources/bullying/combat-bullying-tips" class="text-blue-600 hover:underline" target="_blank">Kids Mental Health Foundation</a></p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border-l-4 border-cyan-500 shadow-sm">
+                        <p class="font-semibold text-gray-900 mb-1">[20] SEP - Secretaria de Educação Pública (México)</p>
+                        <p class="italic">"Guía para Docentes: Todas y todos vs el Acoso Escolar"</p>
+                        <p class="mt-2 text-gray-600">Protocolos de atenção e prevenção do bullying na escola. Disponível em: <a href="https://formacioncontinua.sep.gob.mx/storage/recursos/2024/05/svAO1BPIfk-Guia%20para%20Docentes_Todas%20y%20todos%20vs%20el%20Acoso%20Escolar.pdf" class="text-blue-600 hover:underline" target="_blank">SEP México</a></p>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-6 bg-blue-50 rounded-xl border border-blue-200">
+                    <h4 class="font-bold text-blue-900 mb-2 flex items-center gap-2">
+                        <i class="fas fa-info-circle"></i>
+                        Nota sobre as fontes
+                    </h4>
+                    <p class="text-sm text-blue-800">
+                        Todas as informações apresentadas neste site são baseadas em dados oficiais de instituições governamentais (IBGE, Ministério da Educação), organizações internacionais (UNESCO, UNICEF, OMS) e legislação vigente (Lei 14.811/2024). As estatísticas mais recentes são da Pesquisa Nacional de Saúde do Escolar (PeNSE) 2024, divulgada em março de 2026.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white font-bold">
+                            <i class="fas fa-shield-alt text-sm"></i>
+                        </div>
+                        <span class="font-bold text-lg">SafeSchool</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Informação e conscientização sobre bullying e cyberbullying no Brasil.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#definicao" class="hover:text-white transition-colors">O que é Bullying</a></li>
+                        <li><a href="#estatisticas" class="hover:text-white transition-colors">Estatísticas</a></li>
+                        <li><a href="#prevencao" class="hover:text-white transition-colors">Como Prevenir</a></li>
+                        <li><a href="#referencias" class="hover:text-white transition-colors">Referências</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Ajuda Imediata</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i> CVV: 188</li>
+                        <li><i class="fas fa-phone mr-2"></i> Polícia: 190</li>
+                        <li><i class="fas fa-phone mr-2"></i> Direitos Humanos: 100</li>
+                        <li><i class="fas fa-phone mr-2"></i> Disque Denúncia: 181</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Compartilhe</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-pink-500 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-500 transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2026 SafeSchool - Informação sobre Bullying. Conteúdo educativo baseado em dados oficiais.</p>
+                <p class="mt-2">Se você está em situação de risco, procure ajuda profissional imediatamente.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Tab Switching
+        function switchTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+            });
+            
+            // Show selected content
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            
+            // Add active class to clicked button
+            document.getElementById('tab-' + tabName).classList.add('tab-active');
+        }
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-counter');
+            
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = current.toFixed(1);
+                    }
+                }, 16);
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.querySelector('.stat-counter')) {
+                        animateCounters();
+                    }
+                    entry.target.classList.add('animate-slide-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
